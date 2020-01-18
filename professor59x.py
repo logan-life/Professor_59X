@@ -31,7 +31,7 @@ def from_text():
             sleep(3600)
 
 
-for tweet in tweepy.Cursor(api.search, q='#PennEngineering', lang='en').items(10):
+for tweet in tweepy.Cursor(api.search, q='#PennEngineering').items():
     try:
         print('\nTweet by: @' + tweet.user.screen_name)
 
@@ -41,11 +41,11 @@ for tweet in tweepy.Cursor(api.search, q='#PennEngineering', lang='en').items(10
         tweet.favorite()
         print('Favorited the tweet')
 
-        if not tweet.user.following():
+        if not tweet.user.following:
             tweet.user.follow()
             print('Followed the user')
 
-        # wait for an hour
+        #wait for an hour before retweeting anything else
         sleep(3600)
 
     except tweepy.TweepError as e:
