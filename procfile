@@ -1,2 +1,2 @@
 web: python server.py
-worker: nohup python professor59x.py &
+worker: python professor59x.py 
