@@ -3,3 +3,5 @@ gunicorn
 django-heroku
 tweepy==3.8.0
 Flask
+threading
+
