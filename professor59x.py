@@ -60,7 +60,7 @@ def from_text():
                 try:
                     print(line)
                     if line != '\n':
-                        api.update_status(line)
+                        api.update_status("A random line from A Midsummer Night's Dream:\n"+line)
                         # wait six hours before doing it again
                         sleep(21600)
                     else:
