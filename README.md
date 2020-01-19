@@ -2,7 +2,7 @@
 
 [Follow the Professor on Twitter here.](https://twitter.com/Professor_59X)
 
-This bot was initially developed during the inaugural hackathon event from the UPenn CIT59X student group by Logan Ayliffe and Abdulla AlBadi AlDhaheri. The [MCIT program at UPenn](https://www.cis.upenn.edu/graduate/program-offerings/master-of-computer-and-information-technology/requirements/) has core courses which use the numbering convention 59(X), so that's why this bot has this name.
+This bot was initially developed during the inaugural hackathon event from the UPenn CIT59X student group by [Logan Ayliffe](https://twitter.com/logan_ayliffe) and Abdulla AlBadi AlDhaheri. The [MCIT program at UPenn](https://www.cis.upenn.edu/graduate/program-offerings/master-of-computer-and-information-technology/requirements/) has core courses which use the numbering convention 59(X), so that's why this bot has this name.
 
  This bot was written in python and uses [tweepy](http://docs.tweepy.org/en/v3.8.0/api.html#status-methods) to interact with the Twitter API and is hosted using Heroku. The initial build was created using [this tutorial from Digital Ocean.](https://www.digitalocean.com/community/tutorials/how-to-create-a-twitterbot-with-python-3-and-the-tweepy-library) The Heroku deployment was helped along by [this post by Emily Cain](https://dev.to/emcain/how-to-set-up-a-twitter-bot-with-python-and-heroku-1n39).
 
