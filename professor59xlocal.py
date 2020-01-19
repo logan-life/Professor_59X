@@ -1,4 +1,5 @@
 import tweepy
+from credentials import *
 from time import sleep
 import random
 import os
@@ -12,8 +13,8 @@ ACCESS_SECRET = environ['ACCESS_SECRET']
 
 
 # setup OAuth and integrate with API
-auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
 
