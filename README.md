@@ -12,11 +12,11 @@ This bot was initially developed during the inaugural hackathon event from the U
 
 - The bot can tweet a random image from a supplied directory of images.
 
-- The bot can retweet any specified user. Currently retweets stuff from @PennEngineers.
+- The bot can retweet any specified user. Currently retweets stuff from [@PennEngineers.](https://twitter.com/PennEngineers)
 
 **Future Improvements:**
 
-- The **from_text** function could use a lot of improvement. Support grabbing multilines, format the text a bit better, range checking for length versus tweet constraint.
+- The **from_text** function could use a fair amount of improvement / expansion. Support grabbing multilines, format the text a bit better, range checking for length versus tweet constraint.
 
 - It would be nice for **from_image** to be able to tweet an image from somewhere other than a local directory, e.g. [unsplash](https://unsplash.com/).
 
