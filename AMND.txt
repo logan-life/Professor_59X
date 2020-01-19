@@ -62,12 +62,8 @@ Athens. The palace of THESEUS
 
 Enter THESEUS, HIPPOLYTA, PHILOSTRATE, and ATTENDANTS
 
-  THESEUS. Now, fair Hippolyta, our nuptial hour
-    Draws on apace; four happy days bring in
-    Another moon; but, O, methinks, how slow
-    This old moon wanes! She lingers my desires,
-    Like to a step-dame or a dowager,
-    Long withering out a young man's revenue.
+  THESEUS. Now, fair Hippolyta, our nuptial hour Draws on apace; four happy days bring in Another moon; but, O, methinks, how slow This old moon wanes! 
+    She lingers my desires, Like to a step-dame or a dowager, Long withering out a young man's revenue.
   HIPPOLYTA. Four days will quickly steep themselves in night;
     Four nights will quickly dream away the time;
     And then the moon, like to a silver bow

@@ -5,6 +5,8 @@ import os
 import sys
 import threading
 from os import environ
+
+# this grabs the secret twitter credentials from the heroku environmental variables
 CONSUMER_KEY = environ['CONSUMER_KEY']
 CONSUMER_SECRET = environ['CONSUMER_SECRET']
 ACCESS_KEY = environ['ACCESS_KEY']
@@ -15,6 +17,8 @@ ACCESS_SECRET = environ['ACCESS_SECRET']
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
 auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
 api = tweepy.API(auth)
+
+# looks in the supplied /images directory, grabs a random image, tweets it out
 
 
 def from_image():
@@ -29,13 +33,16 @@ def from_image():
             media_id = []
             media_id.append(res.media_id)
             print(media_id)
-            api.update_status(status="Daily Penn Pic! #Penn", media_ids=media_id)
+            api.update_status(status="Daily Penn Pic! #Penn",
+                              media_ids=media_id)
             # wait one day in between
             sleep(86400)
 
         except tweepy.TweepError as e:
             print(e.reason)
             sleep(10800)
+
+# looks in the text file, grabs lines that satisfy conditions in order, tweets them out
 
 
 def from_text():
@@ -53,14 +60,15 @@ def from_text():
             line = line.strip()
 
             CHARACTERS = ('LYSANDER', 'DEMETRIUS', 'HERMIA', 'HELENA',
-                        'OBERON', 'TITANIA', 'PUCK', 'ROBIN GOODFELLOW')
+                          'OBERON', 'TITANIA', 'PUCK', 'ROBIN GOODFELLOW')
             ENDINGS = ('.', '!', '?')
 
             if line.startswith(CHARACTERS) and line.endswith(ENDINGS):
                 try:
                     print(line)
                     if line != '\n':
-                        api.update_status("A random line from A Midsummer Night's Dream:\n"+line)
+                        api.update_status(
+                            "A random line from A Midsummer Night's Dream:\n"+line)
                         # wait six hours before doing it again
                         sleep(21600)
                     else:
@@ -70,6 +78,8 @@ def from_text():
                 except tweepy.TweepError as e:
                     print(e.reason)
                     sleep(10800)
+
+# searches twitter for recent usage of supplied hashtag, then RTs / favs / follows the user who tweeted something using the hashtag.
 
 
 def from_hashtag():
@@ -98,6 +108,8 @@ def from_hashtag():
             except StopIteration:
                 break
 
+# checks if there are any new tweets from the supplier user @PennEngineers and RTs them if so.
+
 
 def from_user():
     while True:
@@ -123,6 +135,7 @@ def from_user():
                 break
 
 
+# multi-threaded so that each function can have different sleep times. This might be overkill but it was easy.
 t1 = threading.Thread(target=from_image)
 t2 = threading.Thread(target=from_text)
 t3 = threading.Thread(target=from_hashtag)

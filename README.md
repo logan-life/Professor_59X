@@ -2,16 +2,26 @@
 
 [Follow the Professor on Twitter here.](https://twitter.com/Professor_59X)
 
-This bot was initially developed during the inaugural hackathon event from the UPenn CIT59X student group by Logan Ayliffe and Abdulla AlBadi AlDhaheri. This bot uses python and tweepy to interact with the Twitter API. The initial build was created using [this excellent tutorial from Digital Ocean.](https://www.digitalocean.com/community/tutorials/how-to-create-a-twitterbot-with-python-3-and-the-tweepy-library)
+This bot was initially developed during the inaugural hackathon event from the UPenn CIT59X student group by Logan Ayliffe and Abdulla AlBadi AlDhaheri. This bot uses python and [tweepy](http://docs.tweepy.org/en/v3.8.0/api.html#status-methods) to interact with the Twitter API and is hosted using Heroku. The initial build was created using [this tutorial from Digital Ocean.](https://www.digitalocean.com/community/tutorials/how-to-create-a-twitterbot-with-python-3-and-the-tweepy-library) The Heroku deployment was helped along by [this post by Emily Cain](https://dev.to/emcain/how-to-set-up-a-twitter-bot-with-python-and-heroku-1n39).
 
 **Current features:**
 
-The bot can tweet lines from a text file.
+- The bot can tweet lines from a text file.
 
-The bot can search for a particular hashtag and then interact with returned tweets, e.g. favorite / retweet / follow that user.
+- The bot can search for a particular hashtag and then interact with returned tweets, e.g. favorite / retweet / follow that user.
 
-The bot can tweet a random image from a supplied directory of images.
+- The bot can tweet a random image from a supplied directory of images.
 
-The bot can retweet any specified user. Currently retweets stuff from @PennEngineers.
+- The bot can retweet any specified user. Currently retweets stuff from @PennEngineers.
+
+**Future Improvements:**
+
+- The **from_text** function could use a lot of improvement. Support grabbing multilines, format the text a bit better, range checking for length versus tweet constraint.
+
+- It would be nice for **from_image** to be able to tweet an image from somewhere other than a local directory, e.g. [unsplash](https://unsplash.com/).
+
+- For both **from_user** and **from_hashtag**, these could be expanded to include more stuff that is relevant to the MCIT student community.
+
+
 
 
