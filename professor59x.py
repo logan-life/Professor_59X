@@ -58,8 +58,6 @@ def from_text():
 
         # sleep(2)
 
-#@PennEngineers
-#pennengineering
 
 def from_hashtag():
     for tweet in tweepy.Cursor(api.search, q='#PennEngineering').items():
@@ -91,9 +89,12 @@ def from_user():
             # Add \n escape character to print() to organize tweets
             print('\nTweet by: @' + tweet.user.screen_name)
 
-            # Retweet tweets as they are found
+            # Retweet and favorite tweets as they are found
             tweet.retweet()
             print('Retweeted the tweet')
+
+            tweet.favorite()
+            print('Favorited the tweet')
 
             #sleep for 3 hours
             sleep(10800)
@@ -107,4 +108,5 @@ def from_user():
 # from_text()
 while True:
     #from_image()
-    from_user()
+    #from_user()
+    from_text()
