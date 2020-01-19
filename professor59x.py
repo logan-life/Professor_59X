@@ -1,112 +1,128 @@
 import tweepy
 from credentials import *
 from time import sleep
-import glob
 import random
-import os, sys
+import os
+import sys
+import threading
 
 # setup OAuth and integrate with API
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
 api = tweepy.API(auth)
 
-# open the text file
-my_file = open('AMND.txt', 'r')
-
-# read line by line and store
-file_lines = my_file.readlines()
-
-# close the file
-my_file.close()
-
-
-# tweet_image(/images)
-
 
 def from_image():
-    path = "/Users/logan/code/src/Environments/twitter/Professor_59X/images"
-    _files = os.listdir(path)
-    number = random.randint(0, len(_files) - 1)
-    file_ = _files[number]
-    image_name = path+"/"+file_
-    res = api.media_upload(image_name)
-    media_id = []
-    media_id.append(res.media_id)
-    print(media_id)
-    api.update_status(status = "Daily Penn Pic! #Penn", media_ids = media_id)
-    sleep(86400)
+    while True:
+        try:
+            path = "/Users/logan/code/src/Environments/twitter/Professor_59X/images"
+            _files = os.listdir(path)
+            number = random.randint(0, len(_files) - 1)
+            file_ = _files[number]
+            image_name = path+"/"+file_
+            res = api.media_upload(image_name)
+            media_id = []
+            media_id.append(res.media_id)
+            print(media_id)
+            api.update_status(status="Daily Penn Pic! #Penn", media_ids=media_id)
+            # wait one day in between
+            sleep(86400)
+
+        except tweepy.TweepError as e:
+            print(e.reason)
+            sleep(10800)
 
 
 def from_text():
-    for line in file_lines:
-        line = line.strip()
-        # print("::"+line+"::")
+    while True:
+        # open the text file
+        my_file = open('AMND.txt', 'r')
 
-        CHARACTERS = ('LYSANDER', 'DEMETRIUS', 'HERMIA', 'HELENA',
-                      'OBERON', 'TITANIA', 'PUCK', 'ROBIN GOODFELLOW')
-        ENDINGS = ('.', '!', '?')
-        if line.startswith(CHARACTERS) and line.endswith(ENDINGS):
+        # read line by line and store
+        file_lines = my_file.readlines()
 
-            try:
-                print(line)
-                # if line != '\n':
-                #   api.update_status(line)
-                # else:
-                #   pass
-            except tweepy.TweepError as e:
-                print(e.reason)
+        # close the file
+        my_file.close()
 
-        # sleep(2)
+        for line in file_lines:
+            line = line.strip()
+
+            CHARACTERS = ('LYSANDER', 'DEMETRIUS', 'HERMIA', 'HELENA',
+                        'OBERON', 'TITANIA', 'PUCK', 'ROBIN GOODFELLOW')
+            ENDINGS = ('.', '!', '?')
+
+            if line.startswith(CHARACTERS) and line.endswith(ENDINGS):
+                try:
+                    print(line)
+                    if line != '\n':
+                        api.update_status(line)
+                        # wait six hours before doing it again
+                        sleep(21600)
+                    else:
+                        sleep(30)
+                        pass
+
+                except tweepy.TweepError as e:
+                    print(e.reason)
+                    sleep(10800)
 
 
 def from_hashtag():
-    for tweet in tweepy.Cursor(api.search, q='#PennEngineering').items():
-        try:
-            print('\nTweet by: @' + tweet.user.screen_name)
+    while True:
+        for tweet in tweepy.Cursor(api.search, q='#PennEngineering').items():
+            try:
+                print('\nTweet by: @' + tweet.user.screen_name)
 
-            tweet.retweet()
-            print('Retweeted the tweet')
+                tweet.retweet()
+                print('Retweeted the tweet')
 
-            tweet.favorite()
-            print('Favorited the tweet')
+                tweet.favorite()
+                print('Favorited the tweet')
 
-            if not tweet.user.following:
-                tweet.user.follow()
-                print('Followed the user')
+                if not tweet.user.following:
+                    tweet.user.follow()
+                    print('Followed the user')
 
-            # wait for an hour before retweeting anything else
-            sleep(3600)
+                # wait for three hours before trying again
+                sleep(10800)
 
-        except tweepy.TweepError as e:
-            print(e.reason)
+            except tweepy.TweepError as e:
+                print(e.reason)
+                sleep(10800)
 
-        except StopIteration:
-            break
+            except StopIteration:
+                break
+
 
 def from_user():
-    for tweet in tweepy.Cursor(api.user_timeline, id=418824121).items(2):
-        try:
-            # Add \n escape character to print() to organize tweets
-            print('\nTweet by: @' + tweet.user.screen_name)
+    while True:
+        for tweet in tweepy.Cursor(api.user_timeline, id=418824121).items(2):
+            try:
+                # Add \n escape character to print() to organize tweets
+                print('\nTweet by: @' + tweet.user.screen_name)
 
-            # Retweet and favorite tweets as they are found
-            tweet.retweet()
-            print('Retweeted the tweet')
+                # Retweet and favorite tweets as they are found
+                tweet.retweet()
+                print('Retweeted the tweet')
 
-            tweet.favorite()
-            print('Favorited the tweet')
+                tweet.favorite()
+                print('Favorited the tweet')
 
-            #sleep for 3 hours
-            sleep(10800)
+                # wait three hours before trying again
+                sleep(10800)
 
-        except tweepy.TweepError as e:
-            print(e.reason)
-        except StopIteration:
-            break
-    
+            except tweepy.TweepError as e:
+                print(e.reason)
+                sleep(10800)
+            except StopIteration:
+                break
 
-# from_text()
-while True:
-    #from_image()
-    #from_user()
-    from_text()
+
+t1 = threading.Thread(target=from_image)
+t2 = threading.Thread(target=from_text)
+t3 = threading.Thread(target=from_hashtag)
+t4 = threading.Thread(target=from_user)
+t1.start()
+t2.start()
+t3.start()
+t4.start()
