@@ -20,7 +20,7 @@ api = tweepy.API(auth)
 def from_image():
     while True:
         try:
-            path = "/Users/logan/code/src/Environments/twitter/Professor_59X/images"
+            path = "images"
             _files = os.listdir(path)
             number = random.randint(0, len(_files) - 1)
             file_ = _files[number]
