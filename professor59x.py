@@ -12,6 +12,9 @@ CONSUMER_SECRET = environ['CONSUMER_SECRET']
 ACCESS_KEY = environ['ACCESS_KEY']
 ACCESS_SECRET = environ['ACCESS_SECRET']
 
+# one hour interval, will be used for frequency of running different threads
+# sleep() requires the time in seconds
+HOUR = 60 * 60
 
 # setup OAuth and integrate with API
 auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -36,11 +39,11 @@ def from_image():
             api.update_status(status="Daily Penn Pic! #Penn",
                               media_ids=media_id)
             # wait one day in between
-            sleep(86400)
+            sleep(HOUR * 24)
 
         except tweepy.TweepError as e:
             print(e.reason)
-            sleep(10800)
+            sleep(HOUR)  # if hit an error, try again in an hour
 
 # looks in the text file, grabs lines that satisfy conditions in order, tweets them out
 
@@ -70,14 +73,14 @@ def from_text():
                         api.update_status(
                             "A random line from A Midsummer Night's Dream:\n"+line)
                         # wait six hours before doing it again
-                        sleep(21600)
+                        sleep(HOUR * 6)
                     else:
-                        sleep(30)
+                        sleep(5)
                         pass
 
                 except tweepy.TweepError as e:
                     print(e.reason)
-                    sleep(10800)
+                    sleep(HOUR)  # if error, try again in an hour
 
 # searches twitter for recent usage of supplied hashtag, then RTs / favs / follows the user who tweeted something using the hashtag.
 
@@ -99,11 +102,11 @@ def from_hashtag():
                     print('Followed the user')
 
                 # wait for three hours before trying again
-                sleep(10800)
+                sleep(HOUR * 3)
 
             except tweepy.TweepError as e:
                 print(e.reason)
-                sleep(10800)
+                sleep(HOUR)
 
             except StopIteration:
                 break
@@ -126,20 +129,22 @@ def from_user():
                 print('Favorited the tweet')
 
                 # wait three hours before trying again
-                sleep(10800)
+                sleep(HOUR * 3)
 
             except tweepy.TweepError as e:
                 print(e.reason)
-                sleep(10800)
+                sleep(HOUR)
             except StopIteration:
                 break
 
 
-# multi-threaded so that each function can have different sleep times. This might be overkill but it was easy.
+# multi-threaded so that each function can have different sleep times.
+# This might be overkill but it was easy.
 t1 = threading.Thread(target=from_image)
 t2 = threading.Thread(target=from_text)
 t3 = threading.Thread(target=from_hashtag)
 t4 = threading.Thread(target=from_user)
+
 t1.start()
 t2.start()
 t3.start()
