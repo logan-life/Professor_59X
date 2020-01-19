@@ -10,7 +10,7 @@ The bot can tweet lines from a text file.
 
 The bot can search for a particular hashtag and then interact with returned tweets, e.g. favorite / retweet / follow that user.
 
-The bot will tweet one picture per day from the images directory.
+The bot can tweet a random image from a supplied directory of images.
 
 The bot can retweet any specified user. Currently retweets stuff from @PennEngineers.
 
