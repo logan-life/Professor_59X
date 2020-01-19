@@ -58,6 +58,8 @@ def from_text():
 
         # sleep(2)
 
+#@PennEngineers
+#pennengineering
 
 def from_hashtag():
     for tweet in tweepy.Cursor(api.search, q='#PennEngineering').items():
@@ -83,7 +85,26 @@ def from_hashtag():
         except StopIteration:
             break
 
+def from_user():
+    for tweet in tweepy.Cursor(api.user_timeline, id=418824121).items(2):
+        try:
+            # Add \n escape character to print() to organize tweets
+            print('\nTweet by: @' + tweet.user.screen_name)
+
+            # Retweet tweets as they are found
+            tweet.retweet()
+            print('Retweeted the tweet')
+
+            #sleep for 3 hours
+            sleep(10800)
+
+        except tweepy.TweepError as e:
+            print(e.reason)
+        except StopIteration:
+            break
+    
 
 # from_text()
 while True:
-    from_image()
+    #from_image()
+    from_user()
