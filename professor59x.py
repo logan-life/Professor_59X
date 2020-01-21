@@ -137,10 +137,6 @@ def from_user():
             except StopIteration:
                 break
 
-def wakeup_heroku():
-    while True:
-        print("Wake up!")
-        sleep(600)
 
 # multi-threaded so that each function can have different sleep times.
 # This might be overkill but it was easy.
@@ -148,10 +144,8 @@ t1 = threading.Thread(target=from_image)
 t2 = threading.Thread(target=from_text)
 t3 = threading.Thread(target=from_hashtag)
 t4 = threading.Thread(target=from_user)
-t5 = threading.Thread(target=wakeup_heroku)
 
 t1.start()
 t2.start()
 t3.start()
 t4.start()
-t5.start()
