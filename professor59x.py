@@ -36,7 +36,7 @@ def from_image():
             media_id = []
             media_id.append(res.media_id)
             print(media_id)
-            api.update_status(status="Daily Penn Pic! #Penn",
+            api.update_status(status= "Enjoy this Penn Pic! #Penn #UPenn #universityofpennsylvania #photography",
                               media_ids=media_id)
             # wait one day in between
             sleep(HOUR * 24)
