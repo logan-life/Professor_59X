@@ -1,6 +1,6 @@
 # Professor_59X: UPenn MCIT Twitter Bot
 
-[Follow the Professor on Twitter here.](https://twitter.com/Professor_59X)
+[Follow the Professor on Twitter here.](https://twitter.com/59xProfessor)
 
 This bot was initially developed during the inaugural hackathon event from the UPenn CIT59X student group by [Logan Ayliffe](https://twitter.com/logan_ayliffe) and Abdulla AlBadi AlDhaheri. The [MCIT program at UPenn](https://www.cis.upenn.edu/graduate/program-offerings/master-of-computer-and-information-technology/requirements/) has core courses which use the numbering convention 59(X), so that's why this bot has this name.
 
