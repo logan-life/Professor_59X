@@ -47,10 +47,9 @@ def from_image():
 
 # searches twitter for recent usage of supplied hashtag, then RTs / favs / follows the user who tweeted something using the hashtag.
 
-
 def from_hashtag():
 
-    for tweet in tweepy.Cursor(api.search, q='#PennEngineering').items():
+    for tweet in tweepy.Cursor(api.search, q='#upenn').items():
         try:
             print('\nTweet by: @' + tweet.user.screen_name)
 
@@ -64,8 +63,8 @@ def from_hashtag():
                 tweet.user.follow()
                 print('Followed the user')
 
-            # wait for three hours before trying again
-            sleep(HOUR * 3)
+            # wait for an hour before trying again
+            sleep(HOUR)
 
         except tweepy.TweepError as e:
             print(e.reason)
@@ -78,7 +77,7 @@ def from_hashtag():
 
 
 def from_user():
-    for tweet in tweepy.Cursor(api.user_timeline, id=418824121).items(2):
+    for tweet in tweepy.Cursor(api.user_timeline, id=418824121).items(4):
         try:
             # Add \n escape character to print() to organize tweets
             print('\nTweet by: @' + tweet.user.screen_name)
