@@ -36,7 +36,7 @@ def from_image():
             media_id = []
             media_id.append(res.media_id)
             print(media_id)
-            api.update_status(status= "Enjoy this Penn Pic! #Penn #UPenn #universityofpennsylvania #photography",
+            api.update_status(status="Enjoy this Penn Pic! #Penn #UPenn #universityofpennsylvania #photography",
                               media_ids=media_id)
             # wait one day in between
             sleep(HOUR * 24)
@@ -45,42 +45,6 @@ def from_image():
             print(e.reason)
             sleep(HOUR)  # if hit an error, try again in an hour
 
-# looks in the text file, grabs lines that satisfy conditions in order, tweets them out
-
-
-def from_text():
-    while True:
-        # open the text file
-        my_file = open('AMND.txt', 'r')
-
-        # read line by line and store
-        file_lines = my_file.readlines()
-
-        # close the file
-        my_file.close()
-
-        for line in file_lines:
-            line = line.strip()
-
-            CHARACTERS = ('LYSANDER', 'DEMETRIUS', 'HERMIA', 'HELENA',
-                          'OBERON', 'TITANIA', 'PUCK', 'ROBIN GOODFELLOW')
-            ENDINGS = ('.', '!', '?')
-
-            if line.startswith(CHARACTERS) and line.endswith(ENDINGS):
-                try:
-                    print(line)
-                    if line != '\n':
-                        api.update_status(
-                            "A random line from A Midsummer Night's Dream:\n"+line)
-                        # wait six hours before doing it again
-                        sleep(HOUR * 6)
-                    else:
-                        sleep(5)
-                        pass
-
-                except tweepy.TweepError as e:
-                    print(e.reason)
-                    sleep(HOUR)  # if error, try again in an hour
 
 # searches twitter for recent usage of supplied hashtag, then RTs / favs / follows the user who tweeted something using the hashtag.
 
@@ -146,6 +110,6 @@ t3 = threading.Thread(target=from_hashtag)
 t4 = threading.Thread(target=from_user)
 
 t1.start()
-#t2.start()
+
 t3.start()
 t4.start()
